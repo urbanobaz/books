@@ -9,8 +9,8 @@ const Book = require('../../models/Book');
 // @access  Public
 router.get('/', (req, res) => {
   Book.find()
-    .sort({ rating: 1 })
-    .then(items => res.json(items))
+    .sort({ rating: -1 })
+    .then(books => res.json(books));
 });
 
 // @route   POST api/books
