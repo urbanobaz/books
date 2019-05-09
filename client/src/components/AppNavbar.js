@@ -9,6 +9,9 @@ import {
   NavItem,
   Container
 } from 'reactstrap';
+import RegisterModal from './auth/RegisterModal';
+import LoginModal from './auth/LoginModal';
+import Logout from './auth/Logout';
 
 class AppNavbar extends Component {
   state = {
@@ -39,6 +42,15 @@ class AppNavbar extends Component {
                 <NavItem>
                   <NavLink>History</NavLink>
                 </NavItem>
+                <NavItem>
+                  <RegisterModal />
+                </NavItem>
+                <NavItem>
+                  <Logout />
+                </NavItem>
+                <NavItem>
+                  <LoginModal />
+                </NavItem>
               </Nav>
             </Collapse>
           </Container>
@@ -47,7 +59,5 @@ class AppNavbar extends Component {
     )
   }
 }
-
-
 
 export default AppNavbar;

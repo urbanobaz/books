@@ -24,7 +24,35 @@ class BookList extends Component {
   render() {
     const { books } = this.props.book;
     return (
-      /* <ListGroup>
+      
+      <div>
+        <Container>
+          <CardColumns>
+            {books.map(({ _id, name, author, pages, rating }) => (
+              <Card key={_id} className="m-1">
+                <Container>
+                  <CardTitle key={name} className="h5 text-center">{name}</CardTitle>
+                  <CardText key={author} className="text-center">Author: {author}</CardText>
+                  <CardText key={pages} className="text-center">Pages: {pages}</CardText>
+                  <CardText key={rating} className="text-center" value="0.00">
+                    Rating: {rating}
+                  </CardText>
+                  <Button
+                    className="remove-btn mb-2"
+                    color="danger"
+                    size="sm"
+                    onClick={this.onDeleteClick.bind(this, _id)}
+                    block
+                  >
+                    Delete Book From List
+                  </Button>
+                </Container>
+              </Card>
+            ))}
+          </CardColumns>
+        </Container>
+
+         {/* <ListGroup>
           <TransitionGroup className="book-list">
             {books.map(({ id, name, author, pages, rating }) => (
               <CSSTransition key={id} timeout={500} classNames="fade">
@@ -40,10 +68,9 @@ class BookList extends Component {
               </CSSTransition>
             ))}
           </TransitionGroup>
-        </ListGroup> */
-      <div>
-        <Container>
-          {/* <CardColumns>
+        </ListGroup> */}
+
+        {/* <CardColumns>
             <TransitionGroup className="book-list">
               {books.map(({ id, name, author, pages, rating }) => (
                 <CSSTransition key={id} timeout={500} classNames="fade">
@@ -72,31 +99,6 @@ class BookList extends Component {
               ))}
             </TransitionGroup>
           </CardColumns> */}
-
-          <CardColumns>
-            {books.map(({ _id, name, author, pages, rating }) => (
-              <Card className="m-1">
-                <Container>
-                  <CardTitle className="h5 text-center">{name}</CardTitle>
-                  <CardText className="text-center">Author: {author}</CardText>
-                  <CardText className="text-center">Pages: {pages}</CardText>
-                  <CardText className="text-center" value="0.00">
-                    Rating: {rating}
-                  </CardText>
-                  <Button
-                    className="remove-btn mb-2"
-                    color="danger"
-                    size="sm"
-                    onClick={this.onDeleteClick.bind(this, _id)}
-                    block
-                  >
-                    Delete Book From List
-                  </Button>
-                </Container>
-              </Card>
-            ))}
-          </CardColumns>
-        </Container>
       </div>
       
     );

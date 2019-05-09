@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://urbano:urbano@cluster0-692hp.mongodb.net/test?retryWrites=true",
+  "jwtSecret": "secret_MERN_key"
+}

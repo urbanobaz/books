@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../../middleware/auth');
 
 // Book Model
 const Book = require('../../models/Book');
@@ -15,8 +16,8 @@ router.get('/', (req, res) => {
 
 // @route   POST api/books
 // @desc    Create a book
-// @access  Public
-router.post('/', (req, res) => {
+// @access  Private
+router.post('/', auth, (req, res) => {
   const newBook = new Book({
     name: req.body.name,
     author: req.body.author,
@@ -29,8 +30,8 @@ router.post('/', (req, res) => {
 
 // @route   DELETE api/books/:id
 // @desc    Delete a book
-// @access  Public
-router.delete('/:id', (req, res) => {
+// @access  Private
+router.delete('/:id', auth, (req, res) => {
   Book.findById(req.params.id)
     .then(book => book.remove().then(() => res.json({ success: true })))
     .catch(err => res.status(404).json({ success: false }))
