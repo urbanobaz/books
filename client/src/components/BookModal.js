@@ -12,12 +12,17 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addBook } from '../actions/bookActions';
+import PropTypes from 'prop-types';
 
 class BookModal extends Component {
   state = {
     modal: false,
     name: ''
   };
+
+  static propTypes = {
+    isAuthenticated: PropTypes.bool
+  }
 
   toggle = () => {
     this.setState({
@@ -49,14 +54,16 @@ class BookModal extends Component {
   render() {
     return (
       <div>
-        <Container>
+        { this.props.isAuthenticated ? <Container>
           <Button
             color="dark"
             style={{marginBottom: '2rem'}}
             onClick={this.toggle}
             block
           >Add Book</Button>  
-        </Container>
+        </Container> : <h4 className="mb-3 text-center">Please log in to add book</h4> }
+
+        
 
         <Modal
           isOpen={this.state.modal}
@@ -118,7 +125,8 @@ class BookModal extends Component {
 }
 
 const mapStateToProps = state => ({
-  book: state.book
+  book: state.book,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { addBook })(BookModal);

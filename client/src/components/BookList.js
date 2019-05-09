@@ -13,6 +13,12 @@ import { getBooks, deleteBook } from "../actions/bookActions";
 import PropTypes from "prop-types";
 
 class BookList extends Component {
+  static propTypes = {
+    getBooks: PropTypes.func.isRequired,
+    book: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool
+  };
+
   componentDidMount() {
     this.props.getBooks();
   }
@@ -24,35 +30,42 @@ class BookList extends Component {
   render() {
     const { books } = this.props.book;
     return (
-      
       <div>
         <Container>
           <CardColumns>
             {books.map(({ _id, name, author, pages, rating }) => (
               <Card key={_id} className="m-1">
                 <Container>
-                  <CardTitle key={name} className="h5 text-center">{name}</CardTitle>
-                  <CardText key={author} className="text-center">Author: {author}</CardText>
-                  <CardText key={pages} className="text-center">Pages: {pages}</CardText>
+                  <CardTitle key={name} className="h5 text-center">
+                    {name}
+                  </CardTitle>
+                  <CardText key={author} className="text-center">
+                    Author: {author}
+                  </CardText>
+                  <CardText key={pages} className="text-center">
+                    Pages: {pages}
+                  </CardText>
                   <CardText key={rating} className="text-center" value="0.00">
                     Rating: {rating}
                   </CardText>
-                  <Button
-                    className="remove-btn mb-2"
-                    color="danger"
-                    size="sm"
-                    onClick={this.onDeleteClick.bind(this, _id)}
-                    block
-                  >
-                    Delete Book From List
-                  </Button>
+                  {this.props.isAuthenticated ? (
+                    <Button
+                      className="remove-btn mb-2"
+                      color="danger"
+                      size="sm"
+                      onClick={this.onDeleteClick.bind(this, _id)}
+                      block
+                    >
+                      Delete Book From List
+                    </Button>
+                  ) : null}
                 </Container>
               </Card>
             ))}
           </CardColumns>
         </Container>
 
-         {/* <ListGroup>
+        {/* <ListGroup>
           <TransitionGroup className="book-list">
             {books.map(({ id, name, author, pages, rating }) => (
               <CSSTransition key={id} timeout={500} classNames="fade">
@@ -100,18 +113,13 @@ class BookList extends Component {
             </TransitionGroup>
           </CardColumns> */}
       </div>
-      
     );
   }
 }
 
-BookList.propTypes = {
-  getBooks: PropTypes.func.isRequired,
-  book: PropTypes.object.isRequired
-};
-
 const mapStateToProps = state => ({
-  book: state.book
+  book: state.book,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(
