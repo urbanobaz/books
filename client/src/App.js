@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AppNavbar from "./components/AppNavbar";
 import BookList from "./components/BookList";
 import BookModal from "./components/BookModal";
+import Search from "./components/Search";
 import { Container } from "reactstrap";
 
 import { Provider } from "react-redux";
@@ -21,9 +22,12 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <AppNavbar />
-          <Container>
+          <Container className="mb-5">
             <BookModal />
             <BookList />
+          </Container>
+          <Container className="mt-5">
+            <Search />
           </Container>
         </div>
       </Provider>

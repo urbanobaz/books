@@ -73,7 +73,7 @@ class BookModal extends Component {
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="book">Book &darr;</Label>
+                <Label for="book">Book  &darr;</Label>
                 <Input
                   type="text"
                   name="name"
